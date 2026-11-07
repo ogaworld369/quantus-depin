@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Minimal permissions only:
+         INTERNET: the JSON-RPC polling of the on-device Quantus node
+           over loopback (http://127.0.0.1:9944/). Loopback socket use
+           still requires this (normal) permission. No traffic ever
+           leaves the device from this app.
+         FOREGROUND_SERVICE / FOREGROUND_SERVICE_SPECIAL_USE: keep the
+           600-second observation loop resident as a specialUse
+           foreground service. specialUse is used because dataSync /
+           remoteMessaging types are capped (dataSync at 6 cumulative
+           hours per 24 h), which would kill a continuous observer —
+           the same reasoning as the Node app.
+         POST_NOTIFICATIONS: show the mandatory foreground-service
+           notification (and nothing else) on API 33+. -->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- allowBackup=false + dataExtractionRules: the app holds the
+         device's DePIN identity seed (encrypted at rest). It must
+         never be carried off-device by backup or device transfer.
+         networkSecurityConfig: the only cleartext traffic is the
+         loopback RPC above; see res/xml/network_security_config.xml
+         (the Node app's audited pattern, reused verbatim). -->
+    <application
+        android:name=".DepinApplication"
+        android:label="Quantus DePIN Companion"
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@android:style/Theme.Material.NoActionBar">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- The observation loop lives here. Not exported: nothing
+             outside the app can start, stop or bind to it.
+             foregroundServiceType=specialUse requires the subtype
+             property below declaring what the long-running service
+             is for. -->
+        <service
+            android:name=".ObservationService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Long-running observation of the on-device Quantus full node over loopback RPC: records signed proof checkpoints (SPEC v0.3) of the node's sync and relay operation at a fixed 600-second cadence while the user keeps observation on." />
+        </service>
+
+    </application>
+
+</manifest>

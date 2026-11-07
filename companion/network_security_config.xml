@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Network security configuration. Same pattern as the Quantus Node
+  app (its versionCode 25, audit finding M1), because the situation
+  is identical: this app's only cleartext traffic is JSON-RPC polling
+  of a node on the same device, over loopback:
+  http://127.0.0.1:9944/. Nothing else in the app speaks HTTP at all.
+
+  The platform default does NOT permit that polling: for targetSdk
+  28+ the default network security policy denies cleartext
+  everywhere, and no loopback exception exists in the policy layer
+  before the implicit localhost configuration of Android 17
+  (API 37). This configuration is therefore explicit and minimal:
+
+    - the base configuration denies cleartext, like the default;
+    - exactly two loopback destinations are permitted: 127.0.0.1
+      (the address the app actually polls) and localhost (the same
+      destination by name);
+    - no other destination is permitted cleartext, ever.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">127.0.0.1</domain>
+        <domain includeSubdomains="false">localhost</domain>
+    </domain-config>
+</network-security-config>
