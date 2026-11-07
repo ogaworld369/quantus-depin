@@ -1,0 +1,105 @@
+{
+  "format": "quantus-depin-proof",
+  "version": "0.1",
+  "device_id": "qdp1-f7ed6d0942e4af73a7c0dee8",
+  "pubkey": "664c7a2415b763401ed2b82ed371bdee45ab1058116eb31dd2f106a783278d1f",
+  "created_at_unix": 1762004200,
+  "params": {
+    "hash": "SHA-256",
+    "signature": "Ed25519",
+    "iterations_per_checkpoint": 1000000,
+    "checkpoint_interval_sec": 600
+  },
+  "checkpoints": [
+    {
+      "seq": 0,
+      "timestamp_unix": 1762000000,
+      "best_block_number": 350000,
+      "best_block_hash": "8ea5fab5be9322bd1b84090a968bb9f2a4e1c8aba632c8f0254344f3ab5aa0a6",
+      "observed_peers": 8,
+      "iterations": 1000000,
+      "prev_checkpoint_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "chain_state": "0eeb137bc3fe1cac3fb09b61c9823c0296c1a21bc77f5e942b66337b589e9de5",
+      "checkpoint_hash": "ba4ba70b748b1ff19e66216012d3c44a99688f868661b3f77061e9d642bbc6d7"
+    },
+    {
+      "seq": 1,
+      "timestamp_unix": 1762000600,
+      "best_block_number": 350100,
+      "best_block_hash": "7ae1883310bba0eaf38497209bca8575f771c170168e8ecbd94597e322ef5084",
+      "observed_peers": 9,
+      "iterations": 1000000,
+      "prev_checkpoint_hash": "ba4ba70b748b1ff19e66216012d3c44a99688f868661b3f77061e9d642bbc6d7",
+      "chain_state": "e0ac795cedf6c6cee5171aa302c208eace178ed63091c71a8892483976ae6d59",
+      "checkpoint_hash": "8d7297bd0786e66083a1832f4c28c2d7b0d2738e1c507a21be7f7e16ad15c6d1"
+    },
+    {
+      "seq": 2,
+      "timestamp_unix": 1762001200,
+      "best_block_number": 350200,
+      "best_block_hash": "454d7bafb71b8b830755075acb862afdcfda4498be42202a0f6300b333355143",
+      "observed_peers": 10,
+      "iterations": 1000000,
+      "prev_checkpoint_hash": "8d7297bd0786e66083a1832f4c28c2d7b0d2738e1c507a21be7f7e16ad15c6d1",
+      "chain_state": "41a9980c3461c3346bfd0a612251eed34ce467ba9e79002715dd379cc5576bac",
+      "checkpoint_hash": "7c5cfe76868f8bc1028f8e3f4bfc761afa7f6779ccbc5ddbed6afb3dbbe0b74f"
+    },
+    {
+      "seq": 3,
+      "timestamp_unix": 1762001800,
+      "best_block_number": 350300,
+      "best_block_hash": "9778ae13c1a98081d1d6c53f47b132eab073077e2093811b4797c2dbf5a062ee",
+      "observed_peers": 11,
+      "iterations": 1000000,
+      "prev_checkpoint_hash": "7c5cfe76868f8bc1028f8e3f4bfc761afa7f6779ccbc5ddbed6afb3dbbe0b74f",
+      "chain_state": "545b5be247f4ba485021999bff04d1f3fcffbe4625439b1faa664ccf920ba79d",
+      "checkpoint_hash": "0221f1c236fcccfd4c56dd99c073ffc013ba6464ea1238698d5133d7af2f1033"
+    },
+    {
+      "seq": 4,
+      "timestamp_unix": 1762002400,
+      "best_block_number": 350400,
+      "best_block_hash": "b18c20c017a60e94df67df44702a61085f84870578af46fc8325279631a525eb",
+      "observed_peers": 12,
+      "iterations": 1000000,
+      "prev_checkpoint_hash": "0221f1c236fcccfd4c56dd99c073ffc013ba6464ea1238698d5133d7af2f1033",
+      "chain_state": "7065bc864c72c1c31dbc81ceb9221beac1c5025872642ed7083104429ae8a4aa",
+      "checkpoint_hash": "73a8b8baaa1b4af8cf5fe32a292d0eb85ffb92d12e7922c857f862ce384520f8"
+    },
+    {
+      "seq": 5,
+      "timestamp_unix": 1762003000,
+      "best_block_number": 350500,
+      "best_block_hash": "c2e5f78d2fcc65ddaea3214279967748ec60b7d597e2fb5060262df04cfd542d",
+      "observed_peers": 8,
+      "iterations": 1000000,
+      "prev_checkpoint_hash": "73a8b8baaa1b4af8cf5fe32a292d0eb85ffb92d12e7922c857f862ce384520f8",
+      "chain_state": "38e3e3c51367051b0a877ba14af9236beb816fa735438cde1c1074097b727a6a",
+      "checkpoint_hash": "6c37ebad02ccdab31b39dab9865fb06f962335a009ed397e11a3da9ec86240e4"
+    },
+    {
+      "seq": 6,
+      "timestamp_unix": 1762003600,
+      "best_block_number": 350600,
+      "best_block_hash": "dc97e1cce194670ca8b4329346c04a7f44d87860f7cbcfa19013f395c2cd1cd8",
+      "observed_peers": 9,
+      "iterations": 1000000,
+      "prev_checkpoint_hash": "6c37ebad02ccdab31b39dab9865fb06f962335a009ed397e11a3da9ec86240e4",
+      "chain_state": "72f4c8be1ddc711ab1a20bd124cde181e6eea4dbe3bf28d82d5ed71c453aa324",
+      "checkpoint_hash": "6fca59e3b3d24b6bbd6347d36235796b34c15345264c2fb21225015def9009c1"
+    },
+    {
+      "seq": 7,
+      "timestamp_unix": 1762004200,
+      "best_block_number": 350700,
+      "best_block_hash": "880c361b00cb2e21a23b1c971eae90648b2a96b6ca7ca064ff3e71be6af5703a",
+      "observed_peers": 10,
+      "iterations": 1000000,
+      "prev_checkpoint_hash": "6fca59e3b3d24b6bbd6347d36235796b34c15345264c2fb21225015def9009c1",
+      "chain_state": "0213972501821b34a848a4eda3b1b13d3686ec4a14a84abfd2041ef49d862365",
+      "checkpoint_hash": "51e01bdac81b49d9e03699b18bc3578cebef04ce632c0c5b3130832f5fe5a5fa"
+    }
+  ],
+  "bundle_hash": "65f5e3127febc829baa56fa7dfc76dc9a725afd8d48784a73643657b1420f1ea",
+  "signature": "2d9eef6c6208725e43d62d86de4f8d3f31ae2f7279638a5953c1be1db69601cadee299c94b48ead3b6421b212d23db27337fcca3e8699ee288a0322b072cb200"
+}
