@@ -1,0 +1,84 @@
+name: Verify submissions
+
+# Verifies every submitted proof bundle with the reference
+# implementation, recomputes the aggregate scores, rebuilds the
+# dashboard, and publishes both as build artifacts.
+#
+# NOTE: chain cross-checks (comparing checkpoint block hashes with
+# the real Quantus chain, and computing spot-check expectations from
+# chain data) are NOT IMPLEMENTED yet. The run summary and the
+# dashboard say so explicitly. See tools/chain_checks.py.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "submissions/**"
+      - "tools/**"
+      - "scripts/**"
+      - ".github/workflows/verify.yml"
+  pull_request:
+    paths:
+      - "submissions/**"
+      - "tools/**"
+      - "scripts/**"
+      - ".github/workflows/verify.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify bundles and recompute scores
+        run: python3 scripts/run_verification.py
+
+      - name: Publish run summary
+        if: always()
+        run: cat results/summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Build dashboard
+        run: python3 scripts/build_dashboard.py
+
+      - name: Upload results and dashboard
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: depin-verification-results
+          path: |
+            results/
+            docs/index.html
+
+  # Deploys the dashboard to GitHub Pages. Requires the repository
+  # setting "Pages -> Source: GitHub Actions" to be enabled by the
+  # repository owner before the first publish.
+  pages:
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: depin-verification-results
+          path: artifact
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: artifact/docs
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
