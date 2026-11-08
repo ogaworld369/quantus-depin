@@ -149,7 +149,7 @@ Scored at %s (unix %d).</p>
 <div class="cards">
   <div class="card"><div class="label">Total adjusted weight</div>
     <div class="value">%.4f</div>
-    <div class="note">Headline metric (SPEC v0.3 scoring rules)</div></div>
+    <div class="note">Headline metric (SPEC scoring rules)</div></div>
   <div class="card"><div class="label">Raw node count</div>
     <div class="value">%d</div>
     <div class="note">Unadjusted count, shown for reference</div></div>
