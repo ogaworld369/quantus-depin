@@ -19,11 +19,11 @@ bundle would still verify with the standalone tools in `tools/`.
 
 ## How it works
 
-1. **Checkpoints.** While the node runs, a companion component records
+1. **Checkpoints.** While the node runs, the node app's built-in recording component records
    one checkpoint every 600 seconds: the best block number and hash it
    observed, the finalized block number, and the number of peers it
    saw. (The SPEC also defines optional witness peer hashes, but the
-   shipped companion does not produce them — the node's safe RPC
+   shipped recorder does not produce them — the node's safe RPC
    withholds peer lists — so witness-based scoring is specified but
    not yet active.) Each checkpoint feeds a sequential hash
    chain (SHA-256 applied 1,000,000 times per checkpoint) seeded with
@@ -49,7 +49,7 @@ bundle would still verify with the standalone tools in `tools/`.
    - **Mutual witnessing (specified, not yet active).** The SPEC
      defines relay credit corroborated when two participants' bundles
      reference each other, with a block-local cap on closed clusters
-     that only ever witness themselves. Because the companion does
+     that only ever witness themselves. Because the recorder does
      not yet emit witness data (see step 1), this part of the scoring
      currently has nothing to act on.
    - **The penalty is time.** The only disqualification is a failed
@@ -73,7 +73,7 @@ side, not in extra steps for participants.
 |---|---|
 | `tools/` | Reference implementation: proof format core, verifier, scorer, CLI (Python 3, standard library only) |
 | `spec/SPEC.md` | The canonical protocol specification (Japanese) |
-| `companion/` | Android companion app sources (v0.3.4) that record checkpoints and export bundles, with its JVM test harness under `companion/tests/` |
+| `companion/` | Android companion app sources (v0.3.4) that record checkpoints and export bundles, with its JVM test harness under `companion/tests/` (the standalone predecessor — recording has since moved into the node app; see Status) |
 | `tests/` | Python test suite for the reference implementation |
 | `submissions/` | Public proof bundles, one directory per participant |
 | `scripts/run_verification.py` | The full pipeline: discover, verify, score, report |
@@ -146,10 +146,16 @@ These are stated plainly, on purpose:
 - **Reference implementation: SPEC rules v0.9; bundle format "0.5".**
   The verifier, scorer, and CLI in `tools/` implement the v0.9 rules
   and are covered by the test suite in `tests/`.
-- **Android companion: v0.3.4.** The companion in `companion/` records
-  checkpoints on a real device and exports bundles in the current
-  format; long-term accumulation on the author's own device is in
-  progress.
+- **Android companion: v0.3.4 (retired).** The standalone companion
+  in `companion/` recorded checkpoints on a real device and
+  exported bundles in the current format. Its role is complete:
+  since 2026-11-11, participation recording is integrated into
+  the Quantus Node app itself
+  ([v3.0](https://github.com/ogaworld369/quantus-android-node/releases/tag/v3.0)),
+  and the author's production identity and its accumulated
+  history were transferred into the node app, where accumulation
+  continues. The companion sources remain in this repository as
+  the standalone reference implementation of the recorder.
 - **Independent reviews.** The design and the implementation have
   been through six independent external review rounds. The most
   recent round confirmed the fix round that addressed all 11
