@@ -25,10 +25,12 @@ bundle would still verify with the standalone tools in `tools/`.
    saw. (The SPEC also defines optional witness peer hashes, but the
    shipped recorder does not produce them — the node's safe RPC
    withholds peer lists — so witness-based scoring is specified but
-   not yet active.) Each checkpoint feeds a sequential hash
-   chain (SHA-256 applied 1,000,000 times per checkpoint) seeded with
-   the observed block hash, so a checkpoint interval cannot be
-   computed before that block exists.
+   not yet active.)
+
+   Each checkpoint feeds a sequential hash chain (SHA-256 applied
+   1,000,000 times per checkpoint) seeded with the observed block
+   hash, so a checkpoint interval cannot be computed before that
+   block exists.
 2. **Bundles.** Checkpoints are collected into a JSON bundle signed
    with the device's Ed25519 key. The device ID is derived from the
    public key; bundles contain public keys only, never secrets.
